@@ -12,6 +12,7 @@ NOW=date
 YEAR=$($NOW | awk '{ print $6 }')
 MONTH=$($NOW | awk '{ print $2 }') # TODO change month format
 DAY=$($NOW | awk '{ print $3 }')-$($NOW | awk '{ print $1 }')
+FILE_NAME=$DAY.md
 
 if [ -d $YEAR ]
 then
@@ -31,15 +32,15 @@ fi
 
 cd ./$MONTH
 
-if [ -a $DAY.md ]
+if [ -a $FILE_NAME ]
 then
-    echo $DAY.md file already exists
+    echo $FILE_NAME file already exists
 else
-    touch "$DAY.md"
+    touch $FILE_NAME
 fi
 
 echo $(pwd)
 echo $(ls)
 
 # TODO: put a header on top of the markdown file
-# TODO: open the markdown file
+# TODO: open the markdown file, maybe with nano $FILE_NAME
