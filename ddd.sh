@@ -5,7 +5,7 @@
 echo "Creating Journal file for today, $(date)"
 NOW=date
 YEAR=$($NOW | awk '{ print $6 }')
-MONTH=$($NOW | awk '{ print $2 }')
+MONTH=$($NOW | awk '{ print $2 }') # TODO change month format
 DAY=$($NOW | awk '{ print $3 }')-$($NOW | awk '{ print $1 }')
 
 if [ -d $YEAR ]
@@ -26,9 +26,9 @@ fi
 
 cd ./$MONTH
 
-if [ -f $DAY ]
+if [ -a $DAY.md ]
 then
-    echo $DAY directory already exists
+    echo $DAY.md file already exists
 else
     touch "$DAY.md"
 fi
