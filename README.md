@@ -1,6 +1,6 @@
 # Diatribes
 
-Simple program + repository for keeping a jouranl.
+Simple program + repository for keeping a journal.
 
 # Usage
 

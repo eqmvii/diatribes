@@ -3,11 +3,17 @@
 # Simple script to create a journal entry for a given day, in an appropriately structured folder system
 
 echo "Creating Journal file for today, $(date)"
+
 NOW=$(date "+%A %Y %m %d %B")
+
 YEAR=$(echo $NOW | awk '{ print $2 }')
-MONTH=$(echo $NOW | awk '{ print $3 }')-$(echo $NOW | awk '{ print $5 }')
-DAY=$(echo $NOW | awk '{ print $4 }')-$(echo $NOW | awk '{ print $1 }')
-FILE_NAME=$DAY.md
+MONTH_FOLDER=$(echo $NOW | awk '{ print $3 }')-$(echo $NOW | awk '{ print $5 }')
+MONTH_NAME=$(echo $NOW | awk '{ print $5 }')
+DAY=$(echo $NOW | awk '{ print $4 }')
+DAY_NAME=$(echo $NOW | awk '{ print $1 }')
+FILE_NAME=$DAY-$DAY_NAME.md
+
+# Create the year/month folders and file, if necessary
 
 if [ -d $YEAR ]
 then
@@ -18,24 +24,23 @@ fi
 
 cd ./$YEAR
 
-if [ -d $MONTH ]
+if [ -d $MONTH_FOLDER ]
 then
-    echo $MONTH directory already exists
+    echo $MONTH_FOLDER directory already exists
 else
-    mkdir $MONTH
+    mkdir $MONTH_FOLDER
 fi
 
-cd ./$MONTH
+cd ./$MONTH_FOLDER
 
 if [ -a $FILE_NAME ]
 then
     echo $FILE_NAME file already exists
 else
     touch $FILE_NAME
+    echo -e "# $DAY_NAME, $MONTH_NAME $DAY $YEAR\n" > $FILE_NAME
 fi
 
-echo $(pwd)
-echo $(ls)
+# Open the file in VS Code
 
-# TODO: put a header on top of the markdown file
-# TODO: open the markdown file, maybe with nano $FILE_NAME or code $FILE_NAME
+code $FILE_NAME
