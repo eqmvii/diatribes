@@ -2,6 +2,10 @@
 
 # Simple script to create a journal entry for a given day, in an appropriately structured folder system
 
+# Change directory to the journal directory
+# Update this if using on your local system.
+cd ~/repos/diatribes
+
 echo "Creating Journal file for today, $(date)"
 
 NOW=$(date "+%A %Y %m %d %B")

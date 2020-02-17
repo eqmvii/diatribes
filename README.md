@@ -8,4 +8,6 @@ Simple program + repository for keeping a journal.
 * `rm -rf ./.git`
 * `git init`
 * Push to your own public/private repo
-* Run `./ddd.sh` on any given day to create your new journal entry!
+* Update the first command of the script to change into this directory on startup
+* Add the repo folder to your PATH variable
+* Run `journal` on any given day to create your new journal entry!
