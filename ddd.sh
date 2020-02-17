@@ -2,16 +2,11 @@
 
 # Simple script to create a journal entry for a given day, in an appropriately structured folder system
 
-# TODO: consider using iso date: date -I | sed 's/-/ /g'
-# which can pipe into awk, since it comes out as 2020 02 06
-
-# TODO: Smarter still, use format options on the date program to get it without more manual intervention
-
 echo "Creating Journal file for today, $(date)"
-NOW=date
-YEAR=$($NOW | awk '{ print $6 }')
-MONTH=$($NOW | awk '{ print $2 }') # TODO change month format
-DAY=$($NOW | awk '{ print $3 }')-$($NOW | awk '{ print $1 }')
+NOW=$(date "+%A %Y %m %d %B")
+YEAR=$(echo $NOW | awk '{ print $2 }')
+MONTH=$(echo $NOW | awk '{ print $3 }')-$(echo $NOW | awk '{ print $5 }')
+DAY=$(echo $NOW | awk '{ print $4 }')-$(echo $NOW | awk '{ print $1 }')
 FILE_NAME=$DAY.md
 
 if [ -d $YEAR ]
@@ -43,4 +38,4 @@ echo $(pwd)
 echo $(ls)
 
 # TODO: put a header on top of the markdown file
-# TODO: open the markdown file, maybe with nano $FILE_NAME
+# TODO: open the markdown file, maybe with nano $FILE_NAME or code $FILE_NAME
